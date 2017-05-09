@@ -15,6 +15,9 @@ class Frontend extends Backend
     {
         return ArrayHelper::merge(parent::getDefaultDepends(), [
             'bootstrap' => [
+                'settings' => [
+                    'class' => \execut\settings\bootstrap\Frontend::class,
+                ],
                 'menu' => [
                     'class' => \execut\menu\bootstrap\Frontend::class,
                 ],
