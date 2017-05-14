@@ -12,13 +12,13 @@
   },
   "require": {
     "yiisoft/yii2": "~2.0.6",
-    "execut/yii2-base": "*",
-    "execut/yii2-navigation": "*",
-    "execut/yii2-alias": "*",
-    "execut/yii2-seo": "*",
-    "execut/yii2-pages": "*",
-    "execut/yii2-menu": "*",
-    "execut/yii2-settings": "*"
+    "execut/yii2-base": "@dev",
+    "execut/yii2-navigation": "@dev",
+    "execut/yii2-alias": "@dev",
+    "execut/yii2-seo": "@dev",
+    "execut/yii2-pages": "@dev",
+    "execut/yii2-menu": "@dev",
+    "execut/yii2-settings": "@dev"
   },
   "autoload": {
     "psr-4": {
