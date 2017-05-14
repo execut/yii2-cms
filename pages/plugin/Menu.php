@@ -30,7 +30,7 @@ class Menu implements Plugin
         }
     }
 
-    public function getAttachedModels() {
+    public function getModels() {
         return [
             Page::class,
         ];

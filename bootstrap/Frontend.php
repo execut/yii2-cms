@@ -4,9 +4,7 @@
 
 namespace execut\cms\bootstrap;
 
-use execut\cms\pages\plugin\Menu;
-use execut\cms\seo\plugin\Pages;
-use execut\menu\Module;
+use execut\robotsTxt\Bootstrap;
 use yii\helpers\ArrayHelper;
 
 class Frontend extends Backend
@@ -15,6 +13,9 @@ class Frontend extends Backend
     {
         return ArrayHelper::merge(parent::getDefaultDepends(), [
             'bootstrap' => [
+                'robotsTxt' => [
+                    'class' => \execut\robotsTxt\Bootstrap::class,
+                ],
                 'settings' => [
                     'class' => \execut\settings\bootstrap\Frontend::class,
                 ],
@@ -44,7 +45,7 @@ class Frontend extends Backend
     public function bootstrap($app)
     {
         if ($this->isStandardLayout($app)) {
-            $app->layoutPath = '@vendor/execut/cms/views/layouts';
+            $app->layoutPath = '@vendor/execut/yii2-cms/views/layouts';
             $app->layout = 'frontend';
         }
 

@@ -17,6 +17,7 @@ AppAsset::register($this);
 <!DOCTYPE html>
 <html lang="<?= Yii::$app->language ?>">
 <head>
+    <link rel="shortcut icon" href="/favicon.ico"/>
     <meta charset="<?= Yii::$app->charset ?>">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <?= Html::csrfMetaTags() ?>
@@ -45,6 +46,8 @@ AppAsset::register($this);
 
     <div class="container">
         <?= Alert::widget() ?>
+        <?= \execut\navigation\widgets\Breadcrumbs::widget() ?>
+        <?= \execut\navigation\widgets\Header::widget() ?>
         <?= $content ?>
     </div>
 </div>

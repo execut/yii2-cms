@@ -7,13 +7,15 @@ namespace execut\cms\bootstrap;
 use execut\menu\Module;
 use execut\navigation\Component;
 use execut\yii\Bootstrap;
+use yii\helpers\ArrayHelper;
 use yii\helpers\Html;
 
-class Backend extends Bootstrap
+class Backend extends Common
 {
+
     public function getDefaultDepends()
     {
-        return [
+        return ArrayHelper::merge(parent::getDefaultDepends(), [
             'bootstrap' => [
                 'menu' => [
                     'class' => \execut\menu\bootstrap\Backend::class,
@@ -25,38 +27,14 @@ class Backend extends Bootstrap
                     'class' => \execut\settings\bootstrap\Backend::class,
                 ],
             ],
-            'modules' => [
-                'menu' => [
-                    'class' => Module::class,
-                    'plugins' => [
-                        [
-                            'class' => \execut\cms\pages\plugin\Menu::class,
-                        ],
-                    ],
-                ],
-                'pages' => [
-                    'class' => \execut\pages\Module::class,
-                    'plugins' => [
-                        [
-                            'class' => \execut\cms\seo\plugin\Pages::class,
-                        ],
-                        [
-                            'class' => \execut\cms\alias\plugin\Pages::class,
-                        ],
-                    ],
-                ],
-                'settings' => [
-                    'class' => \execut\settings\Module::class,
-                ],
-            ],
-        ];
+        ]);
     }
 
     public function bootstrap($app)
     {
         parent::bootstrap($app);
         if ($this->isStandardLayout($app)) {
-            $app->layoutPath = '@vendor/execut/cms/views/layouts';
+            $app->layoutPath = '@vendor/execut/yii2-cms/views/layouts';
             $app->layout = 'backend';
         }
 
