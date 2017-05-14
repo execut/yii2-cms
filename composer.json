@@ -13,7 +13,7 @@
   "require": {
     "yiisoft/yii2": "~2.0.6",
     "execut/yii2-base": "@dev",
-    "execut/yii2-navigation": "@dev",
+    "execut/yii2-navigation": "~1.0.0",
     "execut/yii2-alias": "@dev",
     "execut/yii2-seo": "@dev",
     "execut/yii2-pages": "@dev",
