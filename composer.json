@@ -10,12 +10,8 @@
     "wiki": "https://github.com/execut/yii2-cms/wiki",
     "source": "https://github.com/execut/yii2-cms"
   },
-  "minimum-stability": "stable",
   "require": {
-    "php": ">=5.4.0",
     "yiisoft/yii2": "~2.0.6",
-    "yiisoft/yii2-bootstrap": "~2.0.0",
-    "yiisoft/yii2-swiftmailer": "~2.0.0",
     "execut/yii2-base": "*",
     "execut/yii2-navigation": "*",
     "execut/yii2-alias": "*",
@@ -24,15 +20,9 @@
     "execut/yii2-menu": "*",
     "execut/yii2-settings": "*"
   },
-  "require-dev": {
-    "yiisoft/yii2-debug": "~2.0.0",
-    "yiisoft/yii2-gii": "~2.0.0",
-    "yiisoft/yii2-faker": "~2.0.0",
-
-    "codeception/base": "^2.2.3",
-    "codeception/verify": "~0.3.1"
-  },
-  "config": {
-    "process-timeout": 1800
+  "autoload": {
+    "psr-4": {
+      "execut\\cms\\": ""
+    }
   }
 }
