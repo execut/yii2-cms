@@ -44,11 +44,6 @@ class Frontend extends Backend
 
     public function bootstrap($app)
     {
-        if ($this->isStandardLayout($app)) {
-            $app->layoutPath = '@vendor/execut/yii2-cms/views/layouts';
-            $app->layout = 'frontend';
-        }
-
         parent::bootstrap($app);
     }
 }
