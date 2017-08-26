@@ -31,6 +31,11 @@ class Console extends Common
                     ],
                 ],
             ],
+            'bootstrap' => [
+                'actions' => [
+                    'class' => \execut\actions\Bootstrap::class,
+                ],
+            ],
         ]);
     }
 
