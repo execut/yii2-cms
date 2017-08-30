@@ -35,6 +35,12 @@ class Console extends Common
                 'actions' => [
                     'class' => \execut\actions\Bootstrap::class,
                 ],
+                'pages' => [
+                    'class' => \execut\pages\bootstrap\Console::class,
+                ],
+                'alias' => [
+                    'class' => \execut\alias\bootstrap\Frontend::class,
+                ],
             ],
         ]);
     }

@@ -30,6 +30,9 @@ class Common extends Bootstrap
                         [
                             'class' => \execut\cms\alias\plugin\Pages::class,
                         ],
+                        [
+                            'class' => \execut\cms\menu\plugin\Pages::class,
+                        ],
                     ],
                 ],
                 'settings' => [

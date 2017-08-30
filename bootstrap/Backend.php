@@ -26,6 +26,9 @@ class Backend extends Common
                 'settings' => [
                     'class' => \execut\settings\bootstrap\Backend::class,
                 ],
+                'seo' => [
+                    'class' => \execut\seo\bootstrap\Backend::class,
+                ],
             ],
         ]);
     }
