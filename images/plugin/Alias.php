@@ -16,7 +16,7 @@ class Alias implements Plugin
         return [
             [
                 'modelClass' => File::class,
-                'order' => 0,
+                'order' => 1,
                 'pattern' => '<id:.*>-<dataAttribute:.*>.<extension:.*>',
                 'route' => 'images/frontend',
             ],

@@ -28,6 +28,12 @@ class Images implements Plugin
         foreach ($sizes as $sizeName => $size) {
             $data = $file->$dataAttribute;
             $thumbnailAttributeName = 'size_' . $sizeName;
+            if (is_string($data)) {
+                $tempFile = tempnam('/tmp', 'temp_');
+                file_put_contents($tempFile, $data);
+                $data = fopen($tempFile, 'r+');
+            }
+
             $image = $imagine->read($data);
             if (!empty($size['width'])) {
                 $width = $size['width'];
@@ -55,7 +61,9 @@ class Images implements Plugin
             ]);
             $data = fopen($fileName, 'r+');
             $file->$thumbnailAttributeName = $data;
-            rewind($file->$dataAttribute);
+            if (!is_string($file->$dataAttribute)) {
+                rewind($file->$dataAttribute);
+            }
         }
     }
 
