@@ -20,7 +20,8 @@
     "execut/yii2-pages": "~0.1",
     "execut/yii2-menu": "~0.1",
     "execut/yii2-settings": "~0.1",
-    "execut/yii2-robots-txt": "*"
+    "execut/yii2-robots-txt": "*",
+    "execut/yii2-images": "*"
   },
   "autoload": {
     "psr-4": {
