@@ -27,7 +27,7 @@ class Images implements Plugin
         $sizes = $this->getSizes();
         foreach ($sizes as $sizeName => $size) {
             $data = $file->$dataAttribute;
-            $thumbnailAttributeName = 'size_' . $sizeName;
+            $thumbnailAttributeName = $sizeName;
             if (is_string($data)) {
                 $tempFile = tempnam('/tmp', 'temp_');
                 file_put_contents($tempFile, $data);
