@@ -1,7 +1,6 @@
 <?php
 /**
  */
-/**We often get asked if there is a good place to buy Clenbuterol Clen. on the internet, and certainly this is an important issue, as there are many places that are just trying to rip you off.*/
 namespace execut\cms\seo\plugin;
 use execut\navigation\Page;
 use execut\pages\models\FrontendPage;

@@ -13,7 +13,11 @@ class Alias implements Plugin
     public function getModels()
     {
         return [
-            'pages/frontend' => FrontendPage::class,
+            [
+                'modelClass' => FrontendPage::class,
+                'order' => 100,
+                'route' => 'pages/frontend'
+            ],
         ];
     }
 }

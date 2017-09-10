@@ -4,7 +4,7 @@
 
 namespace execut\cms\bootstrap;
 
-
+use execut\cms\files\plugin\Images;
 use execut\yii\Bootstrap;
 
 class Common extends Bootstrap
@@ -12,7 +12,20 @@ class Common extends Bootstrap
     public function getDefaultDepends()
     {
         return [
+            'bootstrap' => [
+                'images' => [
+                    'class' => \execut\images\bootstrap\Common::class,
+                ],
+            ],
             'modules' => [
+                'images' => [
+                    'class' => \execut\images\Module::class,
+                    'plugins' => [
+                        [
+                            'class' => Images::class,
+                        ]
+                    ],
+                ],
                 'menu' => [
                     'class' => \execut\menu\Module::class,
                     'plugins' => [
@@ -32,6 +45,23 @@ class Common extends Bootstrap
                         ],
                         [
                             'class' => \execut\cms\menu\plugin\Pages::class,
+                        ],
+                        [
+                            'class' => \execut\cms\files\plugin\Pages::class,
+                        ],
+                    ],
+                ],
+                'files' => [
+                    'class' => \execut\files\Module::class,
+                    'plugins' => [
+                        [
+                            'class' => \execut\cms\alias\plugin\Files::class,
+                        ],
+                        [
+                            'class' => \execut\cms\pages\plugin\Files::class,
+                        ],
+                        [
+                            'class' => \execut\cms\images\plugin\Files::class,
                         ],
                     ],
                 ],

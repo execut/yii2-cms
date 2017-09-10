@@ -29,6 +29,9 @@ class Backend extends Common
                 'seo' => [
                     'class' => \execut\seo\bootstrap\Backend::class,
                 ],
+                'files' => [
+                    'class' => \execut\files\bootstrap\Backend::class,
+                ],
             ],
         ]);
     }

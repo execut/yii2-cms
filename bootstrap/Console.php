@@ -41,6 +41,9 @@ class Console extends Common
                 'alias' => [
                     'class' => \execut\alias\bootstrap\Frontend::class,
                 ],
+                'files' => [
+                    'class' => \execut\files\bootstrap\Common::class,
+                ],
             ],
         ]);
     }

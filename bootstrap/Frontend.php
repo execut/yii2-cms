@@ -36,6 +36,12 @@ class Frontend extends Backend
                         [
                             'class' => \execut\cms\pages\plugin\Alias::class,
                         ],
+                        [
+                            'class' => \execut\cms\files\plugin\Alias::class,
+                        ],
+                        [
+                            'class' => \execut\cms\images\plugin\Alias::class,
+                        ],
                     ],
                 ],
             ],
