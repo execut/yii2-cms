@@ -68,6 +68,20 @@ class Common extends Bootstrap
                 'settings' => [
                     'class' => \execut\settings\Module::class,
                 ],
+                'alias' => [
+                    'class' => \execut\alias\Module::class,
+                    'plugins' => [
+                        'pages' => [
+                            'class' => \execut\cms\pages\plugin\Alias::class,
+                        ],
+                        [
+                            'class' => \execut\cms\files\plugin\Alias::class,
+                        ],
+                        [
+                            'class' => \execut\cms\images\plugin\Alias::class,
+                        ],
+                    ],
+                ],
             ],
         ];
     }

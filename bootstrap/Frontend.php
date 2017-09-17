@@ -4,6 +4,7 @@
 
 namespace execut\cms\bootstrap;
 
+use execut\pages\models\FrontendPage;
 use execut\robotsTxt\Bootstrap;
 use yii\helpers\ArrayHelper;
 
@@ -31,20 +32,13 @@ class Frontend extends Backend
             ],
             'modules' => [
                 'alias' => [
-                    'class' => \execut\alias\Module::class,
                     'plugins' => [
-                        [
-                            'class' => \execut\cms\pages\plugin\Alias::class,
+                        'pages' => [
+                            'modelClass' => FrontendPage::class,
                         ],
-                        [
-                            'class' => \execut\cms\files\plugin\Alias::class,
-                        ],
-                        [
-                            'class' => \execut\cms\images\plugin\Alias::class,
-                        ],
-                    ],
+                    ]
                 ],
-            ],
+            ]
         ]);
     }
 
