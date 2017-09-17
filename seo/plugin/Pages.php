@@ -42,40 +42,40 @@ class Pages implements Plugin
             $this->setKeywords($navigationPage, $pageModel);
         }
 
-        $this->replaceText($navigationPage, $pageModel);
-        $this->addLinks($navigationPage, $pageModel);
-    }
-
-    protected function addLinks(Page $navigationPage, \execut\pages\models\Page $pageModel) {
         $allKeywords = Keyword::find()
             ->with('pages')
             ->andWhere([
                 'id' => KeywordVsPage::find()
                     ->select('seo_keyword_id')
-                    ->andWhere('pages_page_id<>' . $pageModel->id)
                     ->andWhere([
                         'pages_page_id' => FrontendPage::find()->select('id')
                     ])
-            ])->all();
-        $allKeywords = ArrayHelper::map($allKeywords, function ($row) {
-            return $row->name;
-        }, function ($row) {
-            return $row;
-        });
+            ])
+            ->orderBy('length(name) DESC')
+            ->all();
 
+        foreach ($allKeywords as $keyword) {
+            if ($this->keywordModelIsHas($pageModel, $keyword)) {
+                $this->replaceText($navigationPage, $pageModel, $keyword);
+            } else {
+                $this->addLinks($navigationPage, $pageModel, $keyword);
+            }
+        }
+    }
+
+    protected function addLinks(Page $navigationPage, \execut\pages\models\Page $pageModel, $keywordModel) {
         $text = $navigationPage->getText();
-        $callback = function ($keyword) use ($allKeywords) {
-            $keywordModel = $allKeywords[mb_strtolower($keyword)];
+        $callback = function ($keywordString) use ($keywordModel) {
             if (!empty($keywordModel->pages)) {
                 $page = $keywordModel->pages[0];
-                return Html::a($keyword, $page->getUrl(), [
+                return Html::a($keywordModel->name, $page->getUrl(), [
                     'title' => $page->header,
                 ]);
             } else {
-                return $keyword;
+                return $keywordString;
             }
         };
-        $text = $this->replaceKeywords($allKeywords, $callback, $text);
+        $text = $this->replaceKeyword($keywordModel->name, $callback, $text);
         $navigationPage->setText($text);
     }
 
@@ -84,18 +84,16 @@ class Pages implements Plugin
      * @param \execut\pages\models\Page $pageModel
      * @return mixed
      */
-    protected function replaceText(Page $navigationPage, \execut\pages\models\Page $pageModel)
+    protected function replaceText(Page $navigationPage, \execut\pages\models\Page $pageModel, $keywordModel)
     {
         $text = $navigationPage->getText();
-        $keywords = $pageModel->seoKeywords;
         $callback = function ($keyword) {
             return '<b>' . $keyword . '</b>';
         };
 
-        $text = $this->replaceKeywords($keywords, $callback, $text);
+        $text = $this->replaceKeyword($keywordModel->name, $callback, $text);
 
         $navigationPage->setText($text);
-        return $keywords;
     }
 
     /**
@@ -118,24 +116,30 @@ class Pages implements Plugin
      * @param $text
      * @return mixed
      */
-    protected function replaceKeywords($keywords, $callback, $text)
+    protected function replaceKeyword($keyword, $callback, $text)
     {
-        $result = [];
-        foreach ($keywords as $keyword) {
-            $result[] = $keyword->name;
-        }
-
-        uasort($result, function ($a, $b) {
-            return mb_strlen($b) > mb_strlen($a);
-        });
-
-        foreach ($result as $keyword) {
-            $pattern = $this->keywordReplacePattern;
-            $pattern = str_replace('{word}', preg_quote($keyword), $pattern);
-            $text = preg_replace_callback($pattern, function ($matches) use ($callback) {
-                return $callback($matches[0]);
-            }, $text);
-        }
+        $pattern = $this->keywordReplacePattern;
+        $pattern = str_replace('{word}', preg_quote($keyword), $pattern);
+        $text = preg_replace_callback($pattern, function ($matches) use ($callback) {
+            return $callback($matches[0]);
+        }, $text);
         return $text;
+    }
+
+    /**
+     * @param \execut\pages\models\Page $pageModel
+     * @param $keywordModel
+     */
+    protected function keywordModelIsHas(\execut\pages\models\Page $pageModel, $keywordModel)
+    {
+        $isHas = false;
+        foreach ($pageModel->seoKeywords as $keyword) {
+            if ($keywordModel->id === $keyword->id) {
+                $isHas = true;
+                break;
+            }
+        }
+
+        return $isHas;
     }
 }
