@@ -68,7 +68,7 @@ class Pages implements Plugin
         $callback = function ($keywordString) use ($keywordModel) {
             if (!empty($keywordModel->pages)) {
                 $page = $keywordModel->pages[0];
-                return Html::a($keywordModel->name, $page->getUrl(), [
+                return Html::a($keywordString, $page->getUrl(), [
                     'title' => $page->header,
                 ]);
             } else {
