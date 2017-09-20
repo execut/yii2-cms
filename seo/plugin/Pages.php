@@ -54,6 +54,7 @@ class Pages implements Plugin
             ->orderBy('length(name) DESC')
             ->all();
 
+        $this->_targetPages = [];
         foreach ($allKeywords as $keyword) {
             if ($this->keywordModelIsHas($pageModel, $keyword)) {
                 $this->replaceText($navigationPage, $pageModel, $keyword);
@@ -63,11 +64,19 @@ class Pages implements Plugin
         }
     }
 
+    protected $_targetPages = [];
     protected function addLinks(Page $navigationPage, \execut\pages\models\Page $pageModel, $keywordModel) {
         $text = $navigationPage->getText();
         $callback = function ($keywordString) use ($keywordModel) {
             if (!empty($keywordModel->pages)) {
                 $page = $keywordModel->pages[0];
+                $pageId = $page->id;
+                if (!empty($this->_targetPages[$pageId])) {
+                    return $keywordString;
+                }
+
+                $this->_targetPages[$pageId] = true;
+
                 return Html::a($keywordString, $page->getUrl(), [
                     'title' => $page->header,
                 ]);
