@@ -14,14 +14,6 @@ class Console extends Common
     {
         return ArrayHelper::merge(parent::getDefaultDepends(), [
             'modules' => [
-                'seo' => [
-                    'class' => \execut\seo\Module::class,
-                    'plugins' => [
-                        [
-                            'class' => \execut\cms\pages\plugin\Seo::class,
-                        ],
-                    ],
-                ],
                 'alias' => [
                     'class' => \execut\alias\Module::class,
                     'plugins' => [

@@ -2,10 +2,10 @@
 /**
  */
 
-namespace execut\cms\pages\plugin;
+namespace execut\cms\files\plugin;
 
 
-use execut\pages\models\Page;
+use execut\files\models\File;
 use execut\seo\Plugin;
 
 class Seo implements Plugin
@@ -13,23 +13,21 @@ class Seo implements Plugin
     public function getKeywordsModels()
     {
         return [
-            Page::class,
+            File::class,
         ];
     }
 
     public function getFieldsModels()
     {
-        return [
-            Page::class,
-        ];
+        return [];
     }
 
     public function getKeywordFieldsPlugins() {
         return [
             [
-                'class' => \execut\pages\crudFields\VsPagesPlugin::class,
+                'class' => \execut\files\crudFields\FilesPlugin::class,
                 'linkAttribute' => 'seo_keyword_id',
-                'vsModelClass' => \execut\cms\seo\models\KeywordVsPage::class,
+                'vsModelClass' => \execut\cms\seo\models\KeywordVsFile::class,
             ],
         ];
     }

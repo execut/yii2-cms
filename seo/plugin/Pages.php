@@ -6,7 +6,7 @@ use execut\navigation\Page;
 use execut\pages\models\FrontendPage;
 use execut\pages\Plugin;
 use execut\seo\models\Keyword;
-use execut\seo\models\KeywordVsPage;
+use execut\cms\seo\models\KeywordVsPage;
 use yii\base\Module;
 use yii\db\Expression;
 use yii\helpers\ArrayHelper;
@@ -22,6 +22,8 @@ class Pages implements Plugin
             ],
             [
                 'class' => \execut\seo\crudFields\Keywords::class,
+                'linkAttribute' => 'pages_page_id',
+                'vsModelClass' => \execut\cms\seo\models\KeywordVsPage::class,
             ],
         ];
     }
@@ -55,6 +57,8 @@ class Pages implements Plugin
             ->all();
 
         $this->_targetPages = [];
+        $this->usedImages = [];
+        $this->renderedKeywordsImages = [];
         foreach ($allKeywords as $keyword) {
             if ($this->keywordModelIsHas($pageModel, $keyword)) {
                 $this->replaceText($navigationPage, $pageModel, $keyword);
@@ -67,7 +71,8 @@ class Pages implements Plugin
     protected $_targetPages = [];
     protected function addLinks(Page $navigationPage, \execut\pages\models\Page $pageModel, $keywordModel) {
         $text = $navigationPage->getText();
-        $callback = function ($keywordString) use ($keywordModel) {
+        $images = $keywordModel->filesFiles;
+        $callback = function ($keywordString) use ($keywordModel, $images, $pageModel) {
             if (!empty($keywordModel->pages)) {
                 $page = $keywordModel->pages[0];
                 $pageId = $page->id;
@@ -76,10 +81,16 @@ class Pages implements Plugin
                 }
 
                 $this->_targetPages[$pageId] = true;
+                $img = $this->renderBestImage($images, $pageModel, $keywordString, false);
+                if ($img) {
+                    $img = Html::a($img, $page->getUrl(), [
+                        'title' => $page->header
+                    ]);
+                }
 
                 return Html::a($keywordString, $page->getUrl(), [
                     'title' => $page->header,
-                ]);
+                ]) . $img;
             } else {
                 return $keywordString;
             }
@@ -96,13 +107,88 @@ class Pages implements Plugin
     protected function replaceText(Page $navigationPage, \execut\pages\models\Page $pageModel, $keywordModel)
     {
         $text = $navigationPage->getText();
-        $callback = function ($keyword) {
-            return '<b>' . $keyword . '</b>';
+        $images = $keywordModel->filesFiles;
+        $renderedKeywordsImages = [];
+        $callback = function ($keyword) use ($images, $pageModel, &$renderedKeywordsImages) {
+            $img = $this->renderBestImage($images, $pageModel, $keyword);
+
+            return '<b>' . $keyword . '</b>' . $img;
         };
 
         $text = $this->replaceKeyword($keywordModel->name, $callback, $text);
 
         $navigationPage->setText($text);
+    }
+
+    protected $usedImages = [];
+    protected $renderedKeywordsImages = [];
+    protected function renderBestImage($images, $pageModel, $keyword, $isRenderLink = true) {
+        if (isset($this->renderedKeywordsImages[strtolower($keyword)])) {
+            return;
+        }
+
+        $this->renderedKeywordsImages[strtolower($keyword)] = true;
+
+        $cache = \yii::$app->cache;
+        $bestImage = null;
+        $bestCount = null;
+        foreach ($images as $image) {
+            if (in_array($image->id, $this->usedImages)) {
+                continue;
+            }
+
+            $cacheKey = __CLASS__ . '_best_images_' . $image->id;
+            $pagesIds = $cache->get($cacheKey);
+            if (!is_array($pagesIds)) {
+                $pagesIds = [];
+            }
+
+            $count = count($pagesIds);
+
+            if (in_array($pageModel->id, $pagesIds)) {
+                $count--;
+            }
+
+            if ($bestCount === null || $count < $bestCount) {
+                $bestCount = $count;
+                $bestImage = $image;
+            }
+        }
+
+        if ($bestImage) {
+            $cacheKey = __CLASS__ . '_best_images_' . $bestImage->id;
+            $pagesIds = $cache->get($cacheKey);
+            if (!is_array($pagesIds)) {
+                $pagesIds = [];
+            }
+            $this->usedImages[] = $bestImage->id;
+            if (!in_array($pageModel->id, $pagesIds)) {
+                $pagesIds[] = $pageModel->id;
+                $cache->set($cacheKey, $pagesIds);
+            }
+
+            $url = [
+                '/files/frontend',
+                'id' => $bestImage->id,
+                'extension' => $bestImage->extension,
+            ];
+
+            $image = Html::img([
+                '/images/frontend',
+                'id' => $bestImage->id,
+                'extension' => $bestImage->extension,
+                'dataAttribute' => 'size_m',
+            ], [
+                'alt' => $bestImage->alt,
+            ]);
+            if ($isRenderLink) {
+                $image = Html::a($image, $url, [
+                    'title' => $bestImage->title,
+                ]);
+            }
+
+            return $image;
+        }
     }
 
     /**

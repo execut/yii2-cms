@@ -16,8 +16,22 @@ class Common extends Bootstrap
                 'images' => [
                     'class' => \execut\images\bootstrap\Common::class,
                 ],
+                'seo' => [
+                    'class' => \execut\seo\bootstrap\Common::class,
+                ],
             ],
             'modules' => [
+                'seo' => [
+                    'class' => \execut\seo\Module::class,
+                    'plugins' => [
+                        [
+                            'class' => \execut\cms\pages\plugin\Seo::class,
+                        ],
+                        [
+                            'class' => \execut\cms\files\plugin\Seo::class,
+                        ],
+                    ],
+                ],
                 'images' => [
                     'class' => \execut\images\Module::class,
                     'plugins' => [
@@ -62,6 +76,9 @@ class Common extends Bootstrap
                         ],
                         [
                             'class' => \execut\cms\images\plugin\Files::class,
+                        ],
+                        [
+                            'class' => \execut\cms\seo\plugin\Files::class,
                         ],
                     ],
                 ],
