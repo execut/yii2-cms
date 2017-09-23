@@ -23,7 +23,6 @@ class Images implements Plugin
     }
 
     public function onBeforeFileSave($file, $dataAttribute) {
-        $imagine = Image::getImagine();
         $sizes = $this->getSizes();
         foreach ($sizes as $sizeName => $size) {
             $data = $file->$dataAttribute;
@@ -34,17 +33,16 @@ class Images implements Plugin
                 $data = fopen($tempFile, 'r+');
             }
 
-            $image = $imagine->read($data);
             if (!empty($size['width'])) {
                 $width = $size['width'];
             } else {
-                $width = 100000;
+                $width = null;
             }
 
             if (!empty($size['height'])) {
                 $height = $size['height'];
             } else {
-                $height = 100000;
+                $height = null;
             }
 
             if (!empty($size['mode'])) {
@@ -53,11 +51,10 @@ class Images implements Plugin
                 $mode = ImageInterface::THUMBNAIL_INSET;
             }
 
-            $box = new Box($width, $height);
-            $image = $image->thumbnail($box, $mode);
+            $image = Image::thumbnail($data, $width, $height, $mode);
             $fileName = tempnam(sys_get_temp_dir(), 'test');
             $image->save($fileName, [
-                'format' => 'jpeg'
+                'format' => $file->extension,
             ]);
             $data = fopen($fileName, 'r+');
             $file->$thumbnailAttributeName = $data;
