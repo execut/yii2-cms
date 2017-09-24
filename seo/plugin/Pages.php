@@ -14,7 +14,7 @@ use yii\helpers\Html;
 
 class Pages implements Plugin
 {
-    public $keywordReplacePattern = '/(?!<(([ab]|(h\d))[^>]*?>)(?<=[^a-z])|(img[^>]*?))({word})(?=[^a-z])(?!(([^<]*?<\/([ab]|(h\d)))>)|([^<]*?>))/i';
+    public $keywordReplacePattern = '/(?!<(([ab]|(h\d))[^>]*?>)|(img[^>]*?))(?<=[^a-z])({word})(?=[^a-z])(?!(([^<]*?<\/([ab]|(h\d)))>)|([^<]*?>))/i';
     public function getPageFieldsPlugins() {
         return [
             [
