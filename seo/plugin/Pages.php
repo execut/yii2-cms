@@ -14,7 +14,7 @@ use yii\helpers\Html;
 
 class Pages implements Plugin
 {
-    public $keywordReplacePattern = '/(?!<([ab]|(h\d))[^>]*?>)(?<=[^a-z])({word})(?=[^a-z])(?!([^<]*?<\/([ab]|(h\d)))>)/i';
+    public $keywordReplacePattern = '/(?!<(([ab]|(h\d))[^>]*?>)(?<=[^a-z])|(img[^>]*?))({word})(?=[^a-z])(?!(([^<]*?<\/([ab]|(h\d)))>)|([^<]*?>))/i';
     public function getPageFieldsPlugins() {
         return [
             [
@@ -59,6 +59,7 @@ class Pages implements Plugin
         $this->_targetPages = [];
         $this->usedImages = [];
         $this->renderedKeywordsImages = [];
+
         foreach ($allKeywords as $keyword) {
             if ($this->keywordModelIsHas($pageModel, $keyword)) {
                 $this->replaceText($navigationPage, $pageModel, $keyword);
