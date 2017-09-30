@@ -8,6 +8,7 @@ use execut\pages\Plugin;
 use execut\seo\models\Keyword;
 use execut\seo\models\KeywordVsPage;
 use yii\base\Module;
+use yii\db\ActiveQuery;
 use yii\db\Expression;
 use yii\helpers\ArrayHelper;
 use yii\helpers\Html;
@@ -32,6 +33,14 @@ class Pages implements Plugin
         $this->replaceText($navigationPage, $pageModel);
     }
 
+    public function applyCurrentPageScopes(ActiveQuery $query) {
+        $query->with([
+            'filesFile' => function ($q) {
+                $q->withoutData();
+            }
+        ]);
+    }
+
 
     /**
      * @param Page $navigationPage
@@ -44,13 +53,13 @@ class Pages implements Plugin
         if ($filesFile = $pageModel->filesFile) {
             $url = [
                 '/files/frontend',
-                'id' => $filesFile->id,
+                'alias' => $filesFile->alias,
                 'extension' => $filesFile->extension,
             ];
 
             $image = Html::a(Html::img([
                 '/images/frontend',
-                'id' => $filesFile->id,
+                'alias' => $filesFile->alias,
                 'extension' => $filesFile->extension,
                 'dataAttribute' => 'size_m',
             ], [

@@ -21,4 +21,9 @@ class Files implements Plugin
     {
         return [];
     }
+
+    public function getDataColumns()
+    {
+        return array_keys(\yii::$app->getModule('images')->getSizes());
+    }
 }

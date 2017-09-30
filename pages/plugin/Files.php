@@ -18,4 +18,9 @@ class Files implements \execut\files\Plugin
             'pages' => \execut\pages\models\Page::class,
         ];
     }
+
+    public function getDataColumns()
+    {
+        return [];
+    }
 }

@@ -8,6 +8,7 @@ use execut\pages\Plugin;
 use execut\seo\models\Keyword;
 use execut\cms\seo\models\KeywordVsPage;
 use yii\base\Module;
+use yii\db\ActiveQuery;
 use yii\db\Expression;
 use yii\helpers\ArrayHelper;
 use yii\helpers\Html;
@@ -45,7 +46,11 @@ class Pages implements Plugin
         }
 
         $allKeywords = Keyword::find()
-            ->with('pages')
+            ->with(['pages' => function ($q) {
+                $q->forLinks();
+            }, 'filesFiles' => function ($q) {
+                $q->withoutData();
+            }])
             ->andWhere([
                 'id' => KeywordVsPage::find()
                     ->select('seo_keyword_id')
@@ -75,6 +80,9 @@ class Pages implements Plugin
         $images = $keywordModel->filesFiles;
         $callback = function ($keywordString) use ($keywordModel, $images, $pageModel) {
             if (!empty($keywordModel->pages)) {
+                /**
+                 * @var \execut\pages\models\Page $page
+                 */
                 $page = $keywordModel->pages[0];
                 $pageId = $page->id;
                 if (!empty($this->_targetPages[$pageId])) {
@@ -170,13 +178,13 @@ class Pages implements Plugin
 
             $url = [
                 '/files/frontend',
-                'id' => $bestImage->id,
+                'alias' => $bestImage->alias,
                 'extension' => $bestImage->extension,
             ];
 
             $image = Html::img([
                 '/images/frontend',
-                'id' => $bestImage->id,
+                'alias' => $bestImage->alias,
                 'extension' => $bestImage->extension,
                 'dataAttribute' => 'size_m',
             ], [
@@ -229,13 +237,18 @@ class Pages implements Plugin
     protected function keywordModelIsHas(\execut\pages\models\Page $pageModel, $keywordModel)
     {
         $isHas = false;
-        foreach ($pageModel->seoKeywords as $keyword) {
-            if ($keywordModel->id === $keyword->id) {
+        foreach ($keywordModel->vsPages as $vsPage) {
+            if ($vsPage->pages_page_id === $pageModel->id) {
                 $isHas = true;
                 break;
             }
         }
 
         return $isHas;
+    }
+
+    public function applyCurrentPageScopes(ActiveQuery $q)
+    {
+        return $q;
     }
 }

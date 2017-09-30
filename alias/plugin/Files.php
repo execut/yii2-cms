@@ -20,4 +20,9 @@ class Files implements \execut\files\Plugin
     {
         return [];
     }
+
+    public function getDataColumns()
+    {
+        return [];
+    }
 }
