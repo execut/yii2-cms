@@ -23,4 +23,9 @@ class Files implements Plugin
     public function getAttachedModels() {
         return [];
     }
+
+    public function getDataColumns()
+    {
+        return [];
+    }
 }

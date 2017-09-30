@@ -7,6 +7,7 @@ namespace execut\cms\menu\plugin;
 
 use execut\navigation\Page;
 use execut\pages\Plugin;
+use yii\db\ActiveQuery;
 use yii\db\Expression;
 
 class Pages implements Plugin
@@ -33,5 +34,10 @@ class Pages implements Plugin
     }
 
     public function initCurrentNavigationPage(Page $navigationPage, \execut\pages\models\Page $pageModel) {
+    }
+
+    public function applyCurrentPageScopes(ActiveQuery $q)
+    {
+        return $q;
     }
 }
