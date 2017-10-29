@@ -7,9 +7,12 @@ namespace execut\cms\files\plugin;
 
 use execut\files\models\File;
 use execut\images\Plugin;
+use Imagine\Filter\Basic\Fill;
 use Imagine\Image\Box;
 use Imagine\Image\ImageInterface;
+use Imagine\Image\Point;
 use yii\base\Event;
+use yii\imagine\BaseImage;
 use yii\imagine\Image;
 
 class Images implements Plugin
@@ -51,11 +54,13 @@ class Images implements Plugin
                 $mode = ImageInterface::THUMBNAIL_INSET;
             }
 
+            BaseImage::$thumbnailBackgroundAlpha = 0;
             $image = Image::thumbnail($data, $width, $height, $mode);
             $fileName = tempnam(sys_get_temp_dir(), 'test');
             $image->save($fileName, [
                 'format' => $file->extension,
             ]);
+
             $data = fopen($fileName, 'r+');
             $file->$thumbnailAttributeName = $data;
             if (!is_string($file->$dataAttribute)) {
