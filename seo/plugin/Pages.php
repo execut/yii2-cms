@@ -121,7 +121,7 @@ class Pages implements Plugin
         $callback = function ($keyword) use ($images, $pageModel, &$renderedKeywordsImages) {
             $img = $this->renderBestImage($images, $pageModel, $keyword);
 
-            return '<b>' . $keyword . '</b>' . $img;
+            return Html::tag('strong', $keyword) . $img;
         };
 
         $text = $this->replaceKeyword($keywordModel->name, $callback, $text);
