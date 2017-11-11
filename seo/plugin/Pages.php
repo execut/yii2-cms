@@ -7,11 +7,13 @@ use execut\pages\models\FrontendPage;
 use execut\pages\Plugin;
 use execut\seo\models\Keyword;
 use execut\cms\seo\models\KeywordVsPage;
+use execut\seo\TextReplacer;
 use yii\base\Module;
 use yii\db\ActiveQuery;
 use yii\db\Expression;
 use yii\helpers\ArrayHelper;
 use yii\helpers\Html;
+use yii\helpers\Url;
 
 class Pages implements Plugin
 {
@@ -66,48 +68,11 @@ class Pages implements Plugin
         $this->renderedKeywordsImages = [];
 
         foreach ($allKeywords as $keyword) {
-            if ($this->keywordModelIsHas($pageModel, $keyword)) {
-                $this->replaceText($navigationPage, $pageModel, $keyword);
-            } else {
-                $this->addLinks($navigationPage, $pageModel, $keyword);
-            }
+            $this->replaceText($navigationPage, $pageModel, $keyword);
         }
     }
 
     protected $_targetPages = [];
-    protected function addLinks(Page $navigationPage, \execut\pages\models\Page $pageModel, $keywordModel) {
-        $text = $navigationPage->getText();
-        $images = $keywordModel->filesFiles;
-        $callback = function ($keywordString) use ($keywordModel, $images, $pageModel) {
-            if (!empty($keywordModel->pages)) {
-                /**
-                 * @var \execut\pages\models\Page $page
-                 */
-                $page = $keywordModel->pages[0];
-                $pageId = $page->id;
-                if (!empty($this->_targetPages[$pageId])) {
-                    return $keywordString;
-                }
-
-                $this->_targetPages[$pageId] = true;
-                $img = $this->renderBestImage($images, $pageModel, $keywordString, false);
-                if ($img) {
-                    $img = Html::a($img, $page->getUrl(), [
-                        'title' => $page->header
-                    ]);
-                }
-
-                return Html::a($keywordString, $page->getUrl(), [
-                    'title' => $page->header,
-                ]) . $img;
-            } else {
-                return $keywordString;
-            }
-        };
-        $text = $this->replaceKeyword($keywordModel->name, $callback, $text);
-        $navigationPage->setText($text);
-    }
-
     /**
      * @param Page $navigationPage
      * @param \execut\pages\models\Page $pageModel
@@ -115,23 +80,49 @@ class Pages implements Plugin
      */
     protected function replaceText(Page $navigationPage, \execut\pages\models\Page $pageModel, $keywordModel)
     {
-        $text = $navigationPage->getText();
-        $images = $keywordModel->filesFiles;
-        $renderedKeywordsImages = [];
-        $callback = function ($keyword) use ($images, $pageModel, &$renderedKeywordsImages) {
-            $img = $this->renderBestImage($images, $pageModel, $keyword);
+        if (empty($keywordModel->pages)) {
+            return;
+        }
 
-            return Html::tag('strong', $keyword) . $img;
-        };
+        $textReplacer = new TextReplacer([
+            'text' => $navigationPage->getText(),
+            'keyword' => $keywordModel->name,
+        ]);
 
-        $text = $this->replaceKeyword($keywordModel->name, $callback, $text);
+        $keywordPageModel = false;
+        if (!$this->keywordModelIsHas($pageModel, $keywordModel)) {
+            $keywordPageModel = current($keywordModel->pages);
+            $textReplacer->href = Url::to($keywordPageModel->getUrl());
+            if (!empty($this->_targetPages[$keywordPageModel->id])) {
+                return;
+            }
 
-        $navigationPage->setText($text);
+            $textReplacer->title = $keywordPageModel->header;
+            $textReplacer->limit = 1;
+        }
+
+        if ($img = $this->findBestImage($keywordModel->filesFiles, $pageModel, $keywordModel->name)) {
+            $textReplacer->img = Url::to([
+                '/files/frontend',
+                'alias' => $img->alias,
+                'extension' => $img->extension,
+                'dataAttribute' => 'size_m',
+            ]);
+            $textReplacer->imgAlt = $img->alt;
+            $textReplacer->limit = 1;
+            $textReplacer->text = $textReplacer->replace();
+            $textReplacer->img = null;
+        }
+
+        $navigationPage->setText($textReplacer->replace());
+        if ($textReplacer->replacedCount > 0 && $keywordPageModel) {
+            $this->_targetPages[$keywordPageModel->id] = true;
+        }
     }
 
     protected $usedImages = [];
     protected $renderedKeywordsImages = [];
-    protected function renderBestImage($images, $pageModel, $keyword, $isRenderLink = true) {
+    protected function findBestImage($images, $pageModel, $keyword) {
         if (isset($this->renderedKeywordsImages[strtolower($keyword)])) {
             return;
         }
@@ -176,27 +167,7 @@ class Pages implements Plugin
                 $cache->set($cacheKey, $pagesIds);
             }
 
-            $url = [
-                '/files/frontend',
-                'alias' => $bestImage->alias,
-                'extension' => $bestImage->extension,
-            ];
-
-            $image = Html::img([
-                '/images/frontend',
-                'alias' => $bestImage->alias,
-                'extension' => $bestImage->extension,
-                'dataAttribute' => 'size_m',
-            ], [
-                'alt' => $bestImage->alt,
-            ]);
-            if ($isRenderLink) {
-                $image = Html::a($image, $url, [
-                    'title' => $bestImage->title,
-                ]);
-            }
-
-            return $image;
+            return $bestImage;
         }
     }
 
@@ -212,22 +183,6 @@ class Pages implements Plugin
             $result[] = $keyword->name;
         }
         $navigationPage->setKeywords(implode(', ', $keywords));
-    }
-
-    /**
-     * @param $keywords
-     * @param $callback
-     * @param $text
-     * @return mixed
-     */
-    protected function replaceKeyword($keyword, $callback, $text)
-    {
-        $pattern = $this->keywordReplacePattern;
-        $pattern = str_replace('{word}', preg_quote($keyword), $pattern);
-        $text = preg_replace_callback($pattern, function ($matches) use ($callback) {
-            return $callback($matches[0]);
-        }, $text);
-        return $text;
     }
 
     /**
