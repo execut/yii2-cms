@@ -103,7 +103,7 @@ class Pages implements Plugin
 
         if ($img = $this->findBestImage($keywordModel->filesFiles, $pageModel, $keywordModel->name)) {
             $textReplacer->img = Url::to([
-                '/files/frontend',
+                '/images/frontend',
                 'alias' => $img->alias,
                 'extension' => $img->extension,
                 'dataAttribute' => 'size_m',
