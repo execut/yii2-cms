@@ -106,7 +106,7 @@ class Pages implements Plugin
                 '/images/frontend',
                 'alias' => $img->alias,
                 'extension' => $img->extension,
-                'dataAttribute' => 'size_m',
+                'dataAttribute' => 'size_sm',
             ]);
             $textReplacer->imgAlt = $img->alt;
             $textReplacer->limit = 1;
