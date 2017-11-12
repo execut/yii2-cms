@@ -4,6 +4,7 @@
 
 namespace execut\cms\bootstrap;
 
+use execut\cms\controllers\ImagesController;
 use execut\pages\Module;
 use execut\yii\Bootstrap;
 use yii\helpers\ArrayHelper;
@@ -47,6 +48,12 @@ class Console extends Common
             $app->controllerMap['migrate'] = [
                 'class' => \bariew\moduleMigration\ModuleMigrateController::class,
                 'templateFile' => '@vendor/execut/yii2-migration/views/template.php',
+            ];
+        }
+
+        if (empty($app->controllerMap['images'])) {
+            $app->controllerMap['images'] = [
+                'class' => ImagesController::class
             ];
         }
     }

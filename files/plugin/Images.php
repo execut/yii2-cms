@@ -28,8 +28,9 @@ class Images implements Plugin
     public function onBeforeFileSave($file, $dataAttribute) {
         $sizes = $this->getSizes();
         foreach ($sizes as $sizeName => $size) {
-            $data = $file->$dataAttribute;
             $thumbnailAttributeName = $sizeName;
+            $attributes = $file->getAttributes();
+            $data = $file->$dataAttribute;
             if (is_string($data)) {
                 $tempFile = tempnam('/tmp', 'temp_');
                 file_put_contents($tempFile, $data);
@@ -79,6 +80,10 @@ class Images implements Plugin
     public function getSizes()
     {
         return [
+            'size_sm' => [
+                'width' => 200,
+                'mode' => ImageInterface::THUMBNAIL_INSET,
+            ],
             'size_m' => [
                 'width' => 375,
                 'mode' => ImageInterface::THUMBNAIL_INSET,
