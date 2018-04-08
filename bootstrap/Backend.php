@@ -17,6 +17,9 @@ class Backend extends Common
     {
         return ArrayHelper::merge(parent::getDefaultDepends(), [
             'bootstrap' => [
+                'goods'=> [
+                    'class' => \execut\goods\bootstrap\Backend::class,
+                ],
                 'alias' => [
                     'class' => \execut\alias\bootstrap\Backend::class,
                 ],

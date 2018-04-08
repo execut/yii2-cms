@@ -5,6 +5,7 @@
 namespace execut\cms\bootstrap;
 
 use execut\cms\files\plugin\Images;
+use execut\cms\goods\plugin\Pages;
 use execut\yii\Bootstrap;
 
 class Common extends Bootstrap
@@ -13,6 +14,9 @@ class Common extends Bootstrap
     {
         return [
             'bootstrap' => [
+                'goods'=> [
+                    'class' => \execut\goods\bootstrap\Common::class,
+                ],
                 'images' => [
                     'class' => \execut\images\bootstrap\Common::class,
                 ],
@@ -21,6 +25,17 @@ class Common extends Bootstrap
                 ],
             ],
             'modules' => [
+                'goods' => [
+                    'class' => \execut\goods\Module::class,
+                    'plugins' => [
+                        [
+                            'class' => \execut\cms\files\plugin\Goods::class,
+                        ],
+                        [
+                            'class' => \execut\cms\pages\plugin\Goods::class,
+                        ],
+                    ],
+                ],
                 'seo' => [
                     'class' => \execut\seo\Module::class,
                     'plugins' => [
@@ -63,11 +78,17 @@ class Common extends Bootstrap
                         [
                             'class' => \execut\cms\files\plugin\Pages::class,
                         ],
+                        [
+                            'class' => \execut\cms\goods\plugin\Pages::class,
+                        ],
                     ],
                 ],
                 'files' => [
                     'class' => \execut\files\Module::class,
                     'plugins' => [
+                        [
+                            'class' => \execut\cms\goods\plugin\Files::class,
+                        ],
                         [
                             'class' => \execut\cms\alias\plugin\Files::class,
                         ],
