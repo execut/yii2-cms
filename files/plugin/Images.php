@@ -77,7 +77,7 @@ class Images implements Plugin
         ];
     }
 
-    public function getSizes()
+    public function getSizes($file = NULL)
     {
         return [
             'size_sm' => [
