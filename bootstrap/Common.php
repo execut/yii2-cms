@@ -19,6 +19,9 @@ class Common extends Bootstrap
                 'seo' => [
                     'class' => \execut\seo\bootstrap\Common::class,
                 ],
+                'settings' => [
+                    'class' => \execut\settings\bootstrap\Common::class,
+                ],
             ],
             'modules' => [
                 'seo' => [
@@ -81,9 +84,6 @@ class Common extends Bootstrap
                             'class' => \execut\cms\seo\plugin\Files::class,
                         ],
                     ],
-                ],
-                'settings' => [
-                    'class' => \execut\settings\Module::class,
                 ],
                 'alias' => [
                     'class' => \execut\alias\Module::class,
