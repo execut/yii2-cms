@@ -1,5 +1,5 @@
 # eXeCUT Yii2 CMS
-Warning! Beta version. Please add tasks [here](https://github.com/execut/yii2-cms/issues) if you find errors.
+Warning! Beta version. Please add tasks [here](https://github.com/execut/yii2-cms/issues) if you find errors. I will try to fix them quickly
 
 CMS, based on Yii2 modular system. All system modules are standalone Yii2 modules and can be used separately from CMS.
 
