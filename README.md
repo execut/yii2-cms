@@ -61,7 +61,7 @@ return [
     ...
 ];
 ```
-* Set CMS language inside ```backend/config/main.php```. Now only supported ```en```. 
+* Set CMS language inside ```backend/config/main.php```. Now only supported ```ru```. 
 * Apply migrations by running:
 ```ssh
 ./yii migrate/up --interactive 0
