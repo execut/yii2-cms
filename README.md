@@ -73,4 +73,4 @@ After install CMS haved 3 application: frontend - here site for users, backend -
 
 For open CMS admin panel enter backend url. Here you can manage your site. Instructions for working with sections are on the page of the module responsible for a specific section. Links to pages listed in the table above.
 
-![Demo](docs/demo.png)
+![Demo](https://raw.githubusercontent.com/execut/yii2-cms/master/docs/demo.png)
