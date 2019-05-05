@@ -1,7 +1,7 @@
 # eXeCUT Yii2 CMS
 CMS, based on Yii2 modular system. All system modules are standalone Yii2 modules and can be used separately from CMS.
 
-List of system features and its modules:
+List of system features and modules:
 
 Feature | Module | Expanded by modules | Development status
 -------------------- | ----------- | -------------- | ------
