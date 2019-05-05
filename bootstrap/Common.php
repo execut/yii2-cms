@@ -4,8 +4,6 @@
 
 namespace execut\cms\bootstrap;
 
-use execut\cms\files\plugin\Images;
-use execut\cms\goods\plugin\Pages;
 use execut\yii\Bootstrap;
 
 class Common extends Bootstrap
@@ -26,16 +24,19 @@ class Common extends Bootstrap
                 'settings' => [
                     'class' => \execut\settings\bootstrap\Common::class,
                 ],
+                'menu' => [
+                    'class' => \execut\menu\bootstrap\Common::class,
+                ]
             ],
             'modules' => [
                 'goods' => [
                     'class' => \execut\goods\Module::class,
                     'plugins' => [
                         [
-                            'class' => \execut\cms\files\plugin\Goods::class,
+                            'class' => \execut\goods\plugin\Files::class,
                         ],
                         [
-                            'class' => \execut\cms\pages\plugin\Goods::class,
+                            'class' => \execut\goods\plugin\Pages::class,
                         ],
                     ],
                 ],
@@ -43,10 +44,10 @@ class Common extends Bootstrap
                     'class' => \execut\seo\Module::class,
                     'plugins' => [
                         [
-                            'class' => \execut\cms\pages\plugin\Seo::class,
+                            'class' => \execut\seo\plugin\Pages::class,
                         ],
                         [
-                            'class' => \execut\cms\files\plugin\Seo::class,
+                            'class' => \execut\seo\plugin\Files::class,
                         ],
                     ],
                 ],
@@ -54,7 +55,7 @@ class Common extends Bootstrap
                     'class' => \execut\images\Module::class,
                     'plugins' => [
                         [
-                            'class' => Images::class,
+                            'class' => \execut\images\plugin\Files::class,
                         ]
                     ],
                 ],
@@ -62,7 +63,7 @@ class Common extends Bootstrap
                     'class' => \execut\menu\Module::class,
                     'plugins' => [
                         [
-                            'class' => \execut\cms\pages\plugin\Menu::class,
+                            'class' => \execut\menu\plugin\Pages::class,
                         ],
                     ],
                 ],
@@ -70,19 +71,19 @@ class Common extends Bootstrap
                     'class' => \execut\pages\Module::class,
                     'plugins' => [
                         [
-                            'class' => \execut\cms\seo\plugin\Pages::class,
+                            'class' => \execut\pages\plugin\Seo::class,
                         ],
                         [
-                            'class' => \execut\cms\alias\plugin\Pages::class,
+                            'class' => \execut\pages\plugin\Alias::class,
                         ],
                         [
-                            'class' => \execut\cms\menu\plugin\Pages::class,
+                            'class' => \execut\pages\plugin\Menu::class,
                         ],
                         [
-                            'class' => \execut\cms\files\plugin\Pages::class,
+                            'class' => \execut\pages\plugin\Files::class,
                         ],
                         [
-                            'class' => \execut\cms\goods\plugin\Pages::class,
+                            'class' => \execut\pages\plugin\Goods::class,
                         ],
                     ],
                 ],
@@ -90,19 +91,19 @@ class Common extends Bootstrap
                     'class' => \execut\files\Module::class,
                     'plugins' => [
                         [
-                            'class' => \execut\cms\goods\plugin\Files::class,
+                            'class' => \execut\files\plugin\Goods::class,
                         ],
                         [
-                            'class' => \execut\cms\alias\plugin\Files::class,
+                            'class' => \execut\files\plugin\Alias::class,
                         ],
                         [
-                            'class' => \execut\cms\pages\plugin\Files::class,
+                            'class' => \execut\files\plugin\Pages::class,
                         ],
                         [
-                            'class' => \execut\cms\images\plugin\Files::class,
+                            'class' => \execut\files\plugin\Images::class,
                         ],
                         [
-                            'class' => \execut\cms\seo\plugin\Files::class,
+                            'class' => \execut\files\plugin\Seo::class,
                         ],
                     ],
                 ],
@@ -110,13 +111,13 @@ class Common extends Bootstrap
                     'class' => \execut\alias\Module::class,
                     'plugins' => [
                         'pages' => [
-                            'class' => \execut\cms\pages\plugin\Alias::class,
+                            'class' => \execut\alias\plugin\Pages::class,
                         ],
                         [
-                            'class' => \execut\cms\files\plugin\Alias::class,
+                            'class' => \execut\alias\plugin\Files::class,
                         ],
                         [
-                            'class' => \execut\cms\images\plugin\Alias::class,
+                            'class' => \execut\alias\plugin\Images::class,
                         ],
                     ],
                 ],
@@ -128,7 +129,6 @@ class Common extends Bootstrap
     {
         parent::bootstrap($app); // TODO: Change the autogenerated stub
         \yii::setAlias('@execut', '@vendor/execut');
-        $this->initLayout($app);
     }
 
     /**
@@ -139,16 +139,5 @@ class Common extends Bootstrap
     {
         $result = $app->layoutPath === $app->getViewPath() . DIRECTORY_SEPARATOR . 'layouts' && $app->layout === 'main';
         return $result;
-    }
-
-    /**
-     * @param $app
-     */
-    protected function initLayout($app)
-    {
-        if ($this->isStandardLayout($app)) {
-            $app->layoutPath = '@vendor/execut/yii2-cms/views/layouts';
-            $app->layout = 'backend';
-        }
     }
 }

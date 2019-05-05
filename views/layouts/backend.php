@@ -46,7 +46,6 @@ AppAsset::register($this);
     <div class="container">
         <?= Breadcrumbs::widget() ?>
         <?= \execut\navigation\widgets\Header::widget() ?>
-        <?= Alert::widget() ?>
         <?= $content ?>
     </div>
 </div>

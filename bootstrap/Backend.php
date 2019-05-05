@@ -47,6 +47,7 @@ class Backend extends Common
         parent::bootstrap($app);
 
         $this->bootstrapNavigation($app);
+        $this->initLayout($app);
     }
 
     protected function bootstrapNavigation($app) {
@@ -66,6 +67,17 @@ class Backend extends Common
                 )
                 . Html::endForm()
                 . '</li>');
+        }
+    }
+
+    /**
+     * @param $app
+     */
+    protected function initLayout($app)
+    {
+        if ($this->isStandardLayout($app)) {
+            $app->layoutPath = '@vendor/execut/yii2-cms/views/layouts';
+            $app->layout = 'backend';
         }
     }
 }

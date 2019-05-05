@@ -8,18 +8,12 @@ use execut\pages\models\FrontendPage;
 use execut\robotsTxt\Bootstrap;
 use yii\helpers\ArrayHelper;
 
-class Frontend extends Backend
+class Frontend extends Common
 {
     public function getDefaultDepends()
     {
         return ArrayHelper::merge(parent::getDefaultDepends(), [
             'bootstrap' => [
-                'robotsTxt' => [
-                    'class' => \execut\robotsTxt\Bootstrap::class,
-                ],
-                'settings' => [
-                    'class' => \execut\settings\bootstrap\Frontend::class,
-                ],
                 'menu' => [
                     'class' => \execut\menu\bootstrap\Frontend::class,
                 ],
@@ -28,6 +22,9 @@ class Frontend extends Backend
                 ],
                 'alias' => [
                     'class' => \execut\alias\bootstrap\Frontend::class,
+                ],
+                'robotsTxt' => [
+                    'class' => \execut\robotsTxt\Bootstrap::class,
                 ],
             ],
             'modules' => [
@@ -45,5 +42,17 @@ class Frontend extends Backend
     public function bootstrap($app)
     {
         parent::bootstrap($app);
+        $this->initLayout($app);
+    }
+
+    /**
+     * @param $app
+     */
+    protected function initLayout($app)
+    {
+        if ($this->isStandardLayout($app)) {
+            $app->layoutPath = '@vendor/execut/yii2-cms/views/layouts';
+            $app->layout = 'frontend';
+        }
     }
 }
