@@ -15,9 +15,9 @@ Menus | [execut/yii2-menu](http://github.com/execut/yii2-menu) | yii2-pages | Co
 Site pages content | [execut/yii2-pages](http://github.com/execut/yii2-pages) | yii2-alias, yii2-files, yii2-goods, yii2-menu, yii2-seo, yii2-sitemap | Complete
 SEO metadata | [execut/yii2-seo](http://github.com/execut/yii2-seo) | yii2-files, yii2-pages | Complete
 Site settings | [execut/yii2-settings](http://github.com/execut/yii2-settings) | yii2-pages, yii2-rbac | Complete
-Robots.txt generation | [execut/yii2-settings](http://github.com/execut/yii2-robots-txt) | - | Complete
+Robots.txt generation | [execut/yii2-robots-txt](http://github.com/execut/yii2-robots-txt) | - | Complete
 Sitemap generation | execut/yii2-sitemap | yii2-pages, yii2-news, yii2-shops | In progress
-Site settings | [execut/yii2-sitemap](http://github.com/execut/yii2-sitemap) | yii2-pages, yii2-news, yii2-shops | Complete
+Site settings | [execut/yii2-settings](http://github.com/execut/yii2-settings) | yii2-pages, yii2-news, yii2-shops | Complete
 Information pages about chain of stores | execut/yii2-shops | yii2-seo | In progress
 Blog, articles and news | execut/yii2-news | yii2-seo | In progress
 Users manager | execut/yii2-users | yii2-rbac | In progress
