@@ -21,7 +21,8 @@
     "execut/yii2-menu": "*",
     "execut/yii2-settings": "*",
     "execut/yii2-robots-txt": "*",
-    "execut/yii2-images": "*"
+    "execut/yii2-images": "*",
+    "execut/yii2-goods": "*"  
   },
   "autoload": {
     "psr-4": {
