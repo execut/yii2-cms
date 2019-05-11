@@ -34,6 +34,7 @@ Supported databases:
 ## Installation
 
 * If you do not have yii2 app advanced, install it via [instructions here](https://github.com/yiisoft/yii2-app-advanced/blob/master/docs/guide/start-installation.md)
+* Register user via standard controller /site/signup and activate it by setting status to 10 inside database.
 * Require CMS via composer by running ```composer require execut/yii2-cms```
 * Add bootstrapping of CMS inside your applications configs ```(console|frontend|backend)/config/main.php```:
 ```php
@@ -60,12 +61,11 @@ return [
 ```ssh
 ./yii migrate/up --interactive 0
 ```
-* Register user via standard controller /site/signup and activate it by setting status to 10 inside database.
 * Remove or rename unused files ```frontend/web/robots.txt``` and ```frontend/controllers/SiteController.php```
 * Congratulations! CMS installed
 
 ## Usage
-After install CMS haved 3 application: frontend - here site for users, backend - administration panel and console.
+After installation CMS has 3 applications: frontend - here site for users, backend - administration panel and console.
 
 For open CMS admin panel enter backend url. Here you can manage your site. Instructions for working with sections are on the page of the module responsible for a specific section. Links to pages listed in the table above.
 
