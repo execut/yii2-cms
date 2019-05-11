@@ -34,20 +34,7 @@ Supported databases:
 ## Installation
 
 * If you do not have yii2 app advanced, install it via [instructions here](https://github.com/yiisoft/yii2-app-advanced/blob/master/docs/guide/start-installation.md)
-* Add temporary fork for CMS component:
-```
-{
-  "type": "vcs",
-  "url": "https://github.com/execut/yii2-save-relations-behavior.git"
-},
-```
-and require it via composer:
-```
-composer require la-haute-societe/yii2-save-relations-behavior dev-adding-dynamic-relation
-```
-* Register user via standard controller /site/signup and activate it by setting status to 10 inside database.
-* Remove or rename unused files ```frontend/web/robots.txt``` and ```frontend/controllers/SiteController.php```
-
+* Require CMS via composer by running ```composer require execut/yii2-cms```
 * Add bootstrapping of CMS inside your applications configs ```(console|frontend|backend)/config/main.php```:
 ```php
 return [
@@ -61,11 +48,20 @@ return [
     ...
 ];
 ```
-* Set CMS language inside ```backend/config/main.php```. Now only supported ```ru```. 
+* Set CMS language inside ```backend/config/main.php```. Now only supported ```ru```:
+```
+return [
+    ...
+    'language' => 'ru',
+    ...
+];
+```
 * Apply migrations by running:
 ```ssh
 ./yii migrate/up --interactive 0
 ```
+* Register user via standard controller /site/signup and activate it by setting status to 10 inside database.
+* Remove or rename unused files ```frontend/web/robots.txt``` and ```frontend/controllers/SiteController.php```
 * Congratulations! CMS installed
 
 ## Usage
