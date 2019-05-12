@@ -52,7 +52,6 @@ class Console extends Common
         $app->controllerMap['migrate'] = ArrayHelper::merge([
             'class' => MigrateController::class,
             'migrationPath' => ['base' => '@app/migrations'],
-            'migrationNamespaces' => ['kartik' => 'kartik\dynagrid\migrations'],
             'templateFile' => '@vendor/execut/yii2-migration/views/template.php',
         ], $app->controllerMap['migrate']);
 

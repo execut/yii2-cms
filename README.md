@@ -12,9 +12,9 @@ Goods | [execut/yii2-goods](http://github.com/execut/yii2-goods) | yii2-files, y
 Files | [execut/yii2-files](http://github.com/execut/yii2-files) | yii2-alias, yii2-goods, yii2-images, yii2-pages, yii2-seo | Complete
 Images | [execut/yii2-images](http://github.com/execut/yii2-images) | yii2-files | Complete
 Menus | [execut/yii2-menu](http://github.com/execut/yii2-menu) | yii2-pages | Complete
-Site pages content | [execut/yii2-pages](http://github.com/execut/yii2-pages) | yii2-alias, yii2-files, yii2-goods, yii2-menu, yii2-seo, yii2-sitemap | Complete
+Site pages content | [execut/yii2-pages](http://github.com/execut/yii2-pages) | yii2-alias, yii2-files, yii2-goods, yii2-menu, yii2-seo, yii2-sitemap, yii2-settings | Complete
 SEO metadata | [execut/yii2-seo](http://github.com/execut/yii2-seo) | yii2-files, yii2-pages | Complete
-Site settings | [execut/yii2-settings](http://github.com/execut/yii2-settings) | yii2-pages, yii2-rbac | Complete
+Site settings | [execut/yii2-settings](http://github.com/execut/yii2-settings) | yii2-rbac | Complete
 Robots.txt generation | [execut/yii2-robots-txt](http://github.com/execut/yii2-robots-txt) | - | Complete
 Sitemap generation | execut/yii2-sitemap | yii2-pages, yii2-news, yii2-shops | In progress
 Site settings | [execut/yii2-settings](http://github.com/execut/yii2-settings) | yii2-pages, yii2-news, yii2-shops | Complete
