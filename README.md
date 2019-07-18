@@ -5,7 +5,7 @@ CMS, based on Yii2 modular system. All system modules are standalone Yii2 module
 
 List of system features and modules:
 
-Feature | Module | Expanded by modules | Development status
+Feature | Module | Extended by modules | Development status
 -------------------- | ----------- | -------------- | ------
 Aliases for urls of records like page and logging their changes | [execut/yii2-alias](http://github.com/execut/yii2-alias) | yii2-files, yii2-images, yii2-news, yii2-pages, yii2-shops | Complete
 Goods | [execut/yii2-goods](http://github.com/execut/yii2-goods) | yii2-files, yii2-pages | Complete
