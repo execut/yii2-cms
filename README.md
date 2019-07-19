@@ -7,17 +7,17 @@ List of system features and modules:
 
 Feature | Module | Extended by modules | Development status
 -------------------- | ----------- | -------------- | ------
-Aliases for urls of records like page and logging their changes | [execut/yii2-alias](http://github.com/execut/yii2-alias) | yii2-files, yii2-images, yii2-news, yii2-pages, yii2-shops | Complete
-Goods | [execut/yii2-goods](http://github.com/execut/yii2-goods) | yii2-files, yii2-pages | Complete
-Files | [execut/yii2-files](http://github.com/execut/yii2-files) | yii2-alias, yii2-goods, yii2-images, yii2-pages, yii2-seo | Complete
-Images | [execut/yii2-images](http://github.com/execut/yii2-images) | yii2-files | Complete
-Menus | [execut/yii2-menu](http://github.com/execut/yii2-menu) | yii2-pages | Complete
-Site pages content | [execut/yii2-pages](http://github.com/execut/yii2-pages) | yii2-alias, yii2-files, yii2-goods, yii2-menu, yii2-seo, yii2-sitemap, yii2-settings | Complete
-SEO metadata | [execut/yii2-seo](http://github.com/execut/yii2-seo) | yii2-files, yii2-pages | Complete
-Site settings | [execut/yii2-settings](http://github.com/execut/yii2-settings) | yii2-rbac | Complete
-Robots.txt generation | [execut/yii2-robots-txt](http://github.com/execut/yii2-robots-txt) | - | Complete
+Aliases for urls of records like page and logging their changes | [execut/yii2-alias](http://github.com/execut/yii2-alias) | yii2-files, yii2-images, yii2-news, yii2-pages, yii2-shops | ![Complete](https://img.shields.io/packagist/v/execut/yii2-alias.svg?color=green&label=%20)
+Goods | [execut/yii2-goods](http://github.com/execut/yii2-goods) | yii2-files, yii2-pages | ![Complete](https://img.shields.io/packagist/v/execut/yii2-goods.svg?color=green&label=%20)
+Files | [execut/yii2-files](http://github.com/execut/yii2-files) | yii2-alias, yii2-goods, yii2-images, yii2-pages, yii2-seo |  ![Complete](https://img.shields.io/packagist/v/execut/yii2-seo.svg?color=green&label=%20)
+Images | [execut/yii2-images](http://github.com/execut/yii2-images) | yii2-files | ![Complete](https://img.shields.io/packagist/v/execut/yii2-files.svg?color=green&label=%20)
+Menus | [execut/yii2-menu](http://github.com/execut/yii2-menu) | yii2-pages | ![Complete](https://img.shields.io/packagist/v/execut/yii2-menu.svg?color=green&label=%20)
+Site pages content | [execut/yii2-pages](http://github.com/execut/yii2-pages) | yii2-alias, yii2-files, yii2-goods, yii2-menu, yii2-seo, yii2-sitemap, yii2-settings | ![Complete](https://img.shields.io/packagist/v/execut/yii2-pages.svg?color=green&label=%20)
+SEO metadata | [execut/yii2-seo](http://github.com/execut/yii2-seo) | yii2-files, yii2-pages |  ![Complete](https://img.shields.io/packagist/v/execut/yii2-seo.svg?color=green&label=%20)
+Site settings | [execut/yii2-settings](http://github.com/execut/yii2-settings) | yii2-rbac |  ![Complete](https://img.shields.io/packagist/v/execut/yii2-settings.svg?color=green&label=%20)
+Robots.txt generation | [execut/yii2-robots-txt](http://github.com/execut/yii2-robots-txt) | - |  ![Complete](https://img.shields.io/packagist/v/execut/yii2-robots-txt.svg?color=green&label=%20)
 Sitemap generation | execut/yii2-sitemap | yii2-pages, yii2-news, yii2-shops | In progress
-Site settings | [execut/yii2-settings](http://github.com/execut/yii2-settings) | yii2-pages, yii2-news, yii2-shops | Complete
+Site settings | [execut/yii2-settings](http://github.com/execut/yii2-settings) | yii2-pages, yii2-news, yii2-shops |  ![Complete](https://img.shields.io/packagist/v/execut/yii2-settings.svg?color=green&label=%20)
 Information pages about chain of stores | execut/yii2-shops | yii2-seo | In progress
 Blog, articles and news | execut/yii2-news | yii2-seo | In progress
 Users manager | execut/yii2-users | yii2-rbac | In progress
