@@ -12,8 +12,6 @@ class Auto implements BootstrapInterface
 {
     public function bootstrap($app)
     {
-        echo 1;
-        exit;
         $bootstraps = [];
         if ($app instanceof Application) {
             $bootstraps[] = new Console();

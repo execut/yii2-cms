@@ -30,6 +30,6 @@
     }
   },
   "extra": {
-    "bootstrap": "execut\\cms\\bootsrap\\Auto"
+    "bootstrap": "execut\\cms\\bootstrap\\Auto"
   }
 }
