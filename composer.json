@@ -17,12 +17,14 @@
     "execut/yii2-navigation": "*",
     "execut/yii2-alias": "*",
     "execut/yii2-seo": "*",
-    "execut/yii2-pages": "*",
     "execut/yii2-menu": "*",
     "execut/yii2-settings": "*",
     "execut/yii2-robots-txt": "*",
     "execut/yii2-images": "*",
-    "execut/yii2-goods": "*"  
+    "execut/yii2-goods": "*",
+    "execut/yii2-pages": "*",
+    "execut/yii2-pages-alias": "*",
+    "execut/yii2-pages-seo": "*"
   },
   "autoload": {
     "psr-4": {

@@ -16,13 +16,8 @@ class Console extends Common
     {
         return ArrayHelper::merge(parent::getDefaultDepends(), [
             'modules' => [
-                'alias' => [
-                    'class' => \execut\alias\Module::class,
-                    'plugins' => [
-                        [
-                            'class' => \execut\alias\plugin\Pages::class,
-                        ],
-                    ],
+                'cms' => [
+                    'class' => \execut\cms\Module::class,
                 ],
             ],
             'bootstrap' => [
@@ -33,7 +28,7 @@ class Console extends Common
                     'class' => \execut\pages\bootstrap\Console::class,
                 ],
                 'alias' => [
-                    'class' => \execut\alias\bootstrap\Frontend::class,
+                    'class' => \execut\alias\bootstrap\Console::class,
                 ],
                 'files' => [
                     'class' => \execut\files\bootstrap\Common::class,

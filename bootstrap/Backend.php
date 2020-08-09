@@ -45,7 +45,6 @@ class Backend extends Common
     public function bootstrap($app)
     {
         parent::bootstrap($app);
-
         $this->bootstrapNavigation($app);
         $this->initLayout($app);
     }
