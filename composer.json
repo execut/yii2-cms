@@ -3,7 +3,7 @@
   "description": "Yii2 eXeCUT CMS",
   "keywords": ["yii2", "cms"],
   "homepage": "https://github.com/execut/yii2-cms",
-  "type": "library",
+  "type": "yii2-extension",
   "license": "Apache-2.0",
   "support": {
     "issues": "https://github.com/execut/yii2-cms/issues?state=open",
