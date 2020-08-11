@@ -51,7 +51,7 @@ To use custom layer, you need to display all the elements for the CMS to work in
 [backend.php](https://github.com/execut/yii2-cms/blob/master/views/layouts/backend.php).
 
 The backend application should start displaying sections and a menu should appear:
-![i/backend-pages.jpg](https://raw.githubusercontent.com/execut/yii2-cms/master/docs/guide-us/i/backend-pages.jpg)
+![i/backend-pages.jpg](https://raw.githubusercontent.com/execut/yii2-cms/master/docs/guide-ru/i/backend-pages.jpg)
 
 In this case, the frontend application should show pages along with the menu:
-![i/backend-pages.jpg](https://raw.githubusercontent.com/execut/yii2-cms/master/docs/guide-us/i/frontend-page.jpg)
+![i/backend-pages.jpg](https://raw.githubusercontent.com/execut/yii2-cms/master/docs/guide-ru/i/frontend-pages.jpg)
