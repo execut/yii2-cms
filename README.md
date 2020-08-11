@@ -33,40 +33,25 @@ Supported databases:
 
 ## Installation
 
-* If you do not have yii2 app advanced, install it via [instructions here](https://github.com/yiisoft/yii2-app-advanced/blob/master/docs/guide/start-installation.md)
-* Register user via standard controller /site/signup and activate it by setting status to 10 inside database.
-* Require CMS via composer by running ```composer require execut/yii2-cms```
-* Add bootstrapping of CMS inside your applications configs ```(console|frontend|backend)/config/main.php```:
-```php
-return [
-    ...
-    'bootstrap' => [
-        ...
-        \execut\cms\bootstrap\Console::class, //for console application
-        \execut\cms\bootstrap\Frontend::class, //for frontend application
-        \execut\cms\bootstrap\Backend::class, //for backend application
-    ],
-    ...
-];
-```
-* Set CMS language inside ```backend/config/main.php```. Now only supported ```ru```:
-```
-return [
-    ...
-    'language' => 'ru',
-    ...
-];
-```
-* Apply migrations by running:
-```ssh
-./yii migrate/up --interactive 0
-```
-* Remove or rename unused files ```frontend/web/robots.txt``` and ```frontend/controllers/SiteController.php```
-* Congratulations! CMS installed
+The easiest installation method is to install over of a [yiisoft/yii2-app-advanced](https://github.com/yiisoft/yii2-app-advanced) based application.
+To install Yii2 CMS into your project, you need to take only three steps:
+1. Connect the CMS package
+   1. If you have an existing project, you can connect the package by running the command ``` composer require execut/yii2-cms```.
+   1. If you are going to deploy Yii2 CMS on a new application, you can install a prepared project-template [execut/yii2-cms-advanced-template](https://github.com/execut/yii2-cms-advanced-template/). Installation instructions [here](https://github.com/execut/yii2-cms-advanced-template/blob/master/docs/guide/start-installation.md).
+1. Apply migrations ```./yii migrate/up --interactive 0```
+1. Create an admin user with the command ```./yii cms/users/create-admin admin password email@example.com```,
+where: admin - login, password - password, email@example.com - user email
 
 ## Usage
-After installation CMS has 3 applications: frontend - here site for users, backend - administration panel and console.
+If you used standard layers layouts/main.php in the in backend and frontend applications, then after installing the CMS, they should be redefined.
+All CMS content is displayed in these layers.
+If this did not happen, then you are using non-standard layers, and the CMS did not reassign them, thinking that you want to use your own.
+To use custom layer, you need to display all the elements for the CMS to work in it in the likeness of these two:
+[frontend.php](https://github.com/execut/yii2-cms/blob/master/views/layouts/frontend.php) and
+[backend.php](https://github.com/execut/yii2-cms/blob/master/views/layouts/backend.php).
 
-For open CMS admin panel enter backend url. Here you can manage your site. Instructions for working with sections are on the page of the module responsible for a specific section. Links to pages listed in the table above.
+The backend application should start displaying sections and a menu should appear:
+![i/backend-pages.jpg](https://raw.githubusercontent.com/execut/yii2-cms/master/docs/guide-us/i/backend-pages.jpg)
 
-![Demo](https://raw.githubusercontent.com/execut/yii2-cms/master/docs/demo.png)
+In this case, the frontend application should show pages along with the menu:
+![i/backend-pages.jpg](https://raw.githubusercontent.com/execut/yii2-cms/master/docs/guide-us/i/frontend-page.jpg)
