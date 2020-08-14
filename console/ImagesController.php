@@ -2,7 +2,7 @@
 /**
  */
 
-namespace execut\cms\controllers;
+namespace execut\cms\console;
 
 
 use execut\files\models\File;

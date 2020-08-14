@@ -49,11 +49,5 @@ class Console extends Common
             'migrationPath' => ['base' => '@app/migrations'],
             'templateFile' => '@vendor/execut/yii2-migration/views/template.php',
         ], $app->controllerMap['migrate']);
-
-        if (empty($app->controllerMap['images'])) {
-            $app->controllerMap['images'] = [
-                'class' => ImagesController::class
-            ];
-        }
     }
 }
