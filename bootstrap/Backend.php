@@ -17,9 +17,9 @@ class Backend extends Common
     {
         return ArrayHelper::merge(parent::getDefaultDepends(), [
             'bootstrap' => [
-                'goods'=> [
-                    'class' => \execut\goods\bootstrap\Backend::class,
-                ],
+//                'goods'=> [
+//                    'class' => \execut\goods\bootstrap\Backend::class,
+//                ],
                 'alias' => [
                     'class' => \execut\alias\bootstrap\Backend::class,
                 ],
@@ -45,8 +45,10 @@ class Backend extends Common
     public function bootstrap($app)
     {
         parent::bootstrap($app);
-        $this->bootstrapNavigation($app);
-        $this->initLayout($app);
+        $app->on(\yii\base\Application::EVENT_BEFORE_REQUEST, function () use ($app) {
+            $this->bootstrapNavigation($app);
+            $this->initLayout($app);
+        });
     }
 
     protected function bootstrapNavigation($app) {
