@@ -12,6 +12,10 @@ class Auto implements BootstrapInterface
 {
     public function bootstrap($app)
     {
+        if (!empty($app->bootstrap['base'])) {
+            return;
+        }
+
         $bootstraps = [];
         if ($app instanceof Application) {
             $bootstraps[] = new Console();
