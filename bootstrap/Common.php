@@ -13,9 +13,12 @@ class Common extends Bootstrap
     {
         return [
             'bootstrap' => [
-//                'goods'=> [
-//                    'class' => \execut\goods\bootstrap\Common::class,
-//                ],
+                'goods'=> [
+                    'class' => \execut\goods\bootstrap\Common::class,
+                ],
+                'files' => [
+                    'class' => \execut\files\bootstrap\Common::class,
+                ],
                 'images' => [
                     'class' => \execut\images\bootstrap\Common::class,
                 ],
@@ -36,17 +39,17 @@ class Common extends Bootstrap
                 ],
             ],
             'modules' => [
-//                'goods' => [
-//                    'class' => \execut\goods\Module::class,
-//                    'plugins' => [
-//                        [
-//                            'class' => \execut\goods\plugin\Files::class,
-//                        ],
-//                        [
-//                            'class' => \execut\goods\plugin\Pages::class,
-//                        ],
-//                    ],
-//                ],
+                'goods' => [
+                    'class' => \execut\goods\Module::class,
+                    'plugins' => [
+                        [
+                            'class' => \execut\goods\plugin\Files::class,
+                        ],
+                        [
+                            'class' => \execut\goods\plugin\Pages::class,
+                        ],
+                    ],
+                ],
                 'seo' => [
                     'class' => \execut\seo\Module::class,
                     'plugins' => [
