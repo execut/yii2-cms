@@ -108,6 +108,7 @@ class Common extends Bootstrap
                         ],
                         [
                             'class' => \execut\files\plugin\Images::class,
+                            'isMigrate' => false,
                         ],
                         [
                             'class' => \execut\files\plugin\Seo::class,
